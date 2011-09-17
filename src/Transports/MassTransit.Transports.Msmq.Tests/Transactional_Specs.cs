@@ -158,7 +158,7 @@ namespace MassTransit.Transports.Msmq.Tests
         [Test]
         public void The_message_should_not_exist_in_the_input_queue()
         {
-            LocalEndpoint.ShouldNotContain(_ping); // it can pass because of infinite processing loop, however we enpoint contains ping message
+            LocalEndpoint.ShouldNotContain(_ping); // it can pass because of infinite processing loop, however enpoint contains ping message
         }
 
         [Test]
