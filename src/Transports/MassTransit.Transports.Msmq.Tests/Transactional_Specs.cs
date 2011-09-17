@@ -121,6 +121,12 @@ namespace MassTransit.Transports.Msmq.Tests
         private PingMessage _ping;
         private FutureMessage<Fault<PingMessage, Guid>> _faultFuture;
 
+
+        public When_a_consumer_does_not_complete_nested_transaction_in_the_root_transaction()
+        {
+            ConfigureEndpointFactory(x => x.SetPurgeOnStartup(true)); // to get test worked after failing
+        }
+
         protected override void EstablishContext()
         {
             base.EstablishContext();
@@ -152,7 +158,7 @@ namespace MassTransit.Transports.Msmq.Tests
         [Test]
         public void The_message_should_not_exist_in_the_input_queue()
         {
-            LocalEndpoint.ShouldNotContain(_ping); // it can pass because of infinite processing loop
+            LocalEndpoint.ShouldNotContain(_ping); // it can pass because of infinite processing loop, however we enpoint contains ping message
         }
 
         [Test]
